@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- ATUALIZAR COM O DOMINIO REAL ANTES DA PUBLICACAO.
-URLs pendentes: /, /politica-de-privacidade.html, /termos-de-uso.html.
-Inserir um elemento url/loc para cada URL absoluta. Nao enviar este arquivo vazio ao Google. -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>https://luardeverao.com.br/</loc></url>
+<url><loc>https://luardeverao.com.br/politica-de-privacidade.html</loc></url>
+<url><loc>https://luardeverao.com.br/termos-de-uso.html</loc></url>
+</urlset>

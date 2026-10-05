@@ -2,13 +2,13 @@
 
 O projeto é estático e não precisa de servidor de aplicação ou instalação de dependências.
 
-Antes da publicação, informe o domínio real executando:
+Domínio oficial e canônico: https://luardeverao.com.br. Para reaplicar as configurações, execute:
 
 ```text
-node scripts/configure-domain.cjs https://SEU-DOMINIO
+node scripts/configure-domain.cjs https://luardeverao.com.br
 ```
 
-O comando preenche canonical nas três páginas, URLs absolutas de Open Graph/Twitter, URL da loja no JSON-LD, sitemap com as três páginas e referência ao sitemap no robots.txt. Enquanto o domínio não for definido, o sitemap permanece preparado e sem URLs fictícias. As imagens sociais relativas precisam desse ajuste para compartilhamento confiável.
+O comando preenche canonical nas três páginas, URLs absolutas de Open Graph/Twitter, URL da loja no JSON-LD, sitemap com as três páginas e referência ao sitemap no robots.txt. O domínio oficial já está configurado nas três páginas, no sitemap e nas imagens sociais.
 
 Publique `index.html`, `politica-de-privacidade.html`, `termos-de-uso.html`, `robots.txt`, `sitemap.xml`, `css/`, `js/` e os arquivos referenciados em `assets/`. Preserve a estrutura de pastas. Não publique `.qa/`, `tests/`, `scripts/` ou este documento. Fotos JPG antigas e arquivos de referência não utilizados podem ficar fora da publicação; os originais são preservados para manutenção.
 

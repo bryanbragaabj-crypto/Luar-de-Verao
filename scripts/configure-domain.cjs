@@ -1,4 +1,4 @@
-// Após definir o domínio: node scripts/configure-domain.cjs https://SEU-DOMINIO
+// Após definir o domínio: node scripts/configure-domain.cjs https://luardeverao.com.br
 // Atualiza SEO sem inventar endereço de publicação.
 const fs = require('node:fs');
 const path = require('node:path');

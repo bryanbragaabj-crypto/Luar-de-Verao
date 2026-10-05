@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-# Adicionar Sitemap: URL absoluta de sitemap.xml apos definir o dominio.
+Sitemap: https://luardeverao.com.br/sitemap.xml
