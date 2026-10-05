@@ -16,7 +16,7 @@ for (const page of pages) {
   html = html.replace('</head>', `  <link rel="canonical" href="${canonical}">\n</head>`);
   if (page === 'index.html') {
     const image = new URL('assets/images/logo-horizontal.png', base).href;
-    html = html.replace(/(<meta (?:property="og:image"|name="twitter:image") content=")[^"]+/, '$1' + image);
+    html = html.replace(/(<meta (?:property="og:image"|name="twitter:image") content=")[^"]+/g, '$1' + image);
     html = html.replace('</head>', `  <meta property="og:url" content="${canonical}">\n</head>`);
     html = html.replace(/(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/, (_, open, json, close) => {
       const data = JSON.parse(json); data.url = canonical;
