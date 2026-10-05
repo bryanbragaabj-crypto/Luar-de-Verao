@@ -1,0 +1,15 @@
+.git/
+.qa/
+.tools/
+.vercel/
+node_modules/
+.env
+.env.*
+tests/
+scripts/
+PRODUCAO.md
+README.md
+assets/images/*.jpg
+assets/images/logo-quadrada.png
+assets/images/PROMPTS.md
+*.log

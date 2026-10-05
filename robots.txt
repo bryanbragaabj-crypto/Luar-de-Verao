@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# Adicionar Sitemap: URL absoluta de sitemap.xml apos definir o dominio.
