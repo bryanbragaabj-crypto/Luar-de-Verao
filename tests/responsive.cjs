@@ -4,7 +4,8 @@ const path = require('node:path');
 const http = require('node:http');
 const { spawn } = require('node:child_process');
 const root = path.resolve(__dirname, '..');
-const output = path.join(root, '.qa');
+const baseUrl = process.argv[2] ? new URL(process.argv[2]).href.replace(/\/$/, '') + '/' : 'http://127.0.0.1:8127/';
+const output = path.join(root, '.qa', process.argv[2] ? 'production' : 'local');
 fs.mkdirSync(output, { recursive: true });
 const server = http.createServer((req, res) => {
   const pathname = decodeURIComponent(req.url.split('?')[0]);
@@ -43,7 +44,7 @@ server.listen(8127, '127.0.0.1', async () => {
     const results = [];
     for (const width of [375, 390, 430, 768, 820, 1366, 1440]) {
       await send('Emulation.setDeviceMetricsOverride', { width, height: 1000, deviceScaleFactor: 1, mobile: false });
-      await send('Page.navigate', { url: 'http://127.0.0.1:8127/' });
+      await send('Page.navigate', { url: baseUrl });
       await new Promise(r => setTimeout(r, 900));
       await send('Runtime.evaluate', { expression: 'document.fonts.ready', awaitPromise: true });
       // Aguarda as imagens visiveis; o carregamento lazy pode continuar apos as fontes.
@@ -115,7 +116,7 @@ server.listen(8127, '127.0.0.1', async () => {
     for (const page of ['politica-de-privacidade.html', 'termos-de-uso.html']) {
       for (const width of [375, 390, 430, 768, 1366, 1440]) {
         await send('Emulation.setDeviceMetricsOverride', {width,height:1000,deviceScaleFactor:1,mobile:false});
-        await send('Page.navigate', {url:'http://127.0.0.1:8127/'+page});
+        await send('Page.navigate', {url:new URL(page, baseUrl).href});
         await new Promise(r=>setTimeout(r,700));
         const check = await send('Runtime.evaluate', {expression: "({noOverflow:document.documentElement.scrollWidth<=innerWidth, returnLink:document.querySelector('.legal-back').getAttribute('href')==='index.html', content:document.querySelector('article').textContent.includes('00.923.062/0001-75')})",returnByValue:true});
         console.log(JSON.stringify({page,width,...check.result.value}));
