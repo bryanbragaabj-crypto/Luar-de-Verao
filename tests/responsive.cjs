@@ -58,7 +58,7 @@ server.listen(8127, '127.0.0.1', async () => {
         const r = { width: innerWidth, noOverflow: document.documentElement.scrollWidth <= innerWidth,
           headerClear: document.querySelector('.hero-visual').getBoundingClientRect().top >= h.bottom - 1,
           whatsappConsistent: [...document.querySelectorAll('[data-contact=whatsapp]')].every(a=>a.querySelector('.whatsapp-icon') && a.getAttribute('aria-label') && !a.classList.contains('is-active')),
-          cardsClickable: cards.length === 6 && cards.every(x => x.tagName === 'A' && x.getAttribute('href')),
+          cardsClickable: cards.length === 14 && cards.every(x => x.tagName === 'A' && x.getAttribute('href')),
           imagesLoaded: [...document.images].filter(x => x.getBoundingClientRect().top < innerHeight).every(x => x.complete && x.naturalWidth > 0),
           categoryColumns: getComputedStyle(document.querySelector('.category-grid')).gridTemplateColumns.split(' ').length,
           fontsLoaded: document.fonts.check('500 16px Inter') && document.fonts.check('500 48px "Playfair Display"'),
@@ -101,16 +101,11 @@ server.listen(8127, '127.0.0.1', async () => {
     }
     const mapFrames = await send('Page.getFrameTree');
     console.log(JSON.stringify({mapFrames: mapFrames.frameTree.childFrames?.map(f => ({url:f.frame.url, unreachableUrl:f.frame.unreachableUrl}))}));
-    const external = await send('Runtime.evaluate', { expression: `(async () => {
-      const source = await (await fetch('/js/script.js')).text();
-      const frame = document.createElement('iframe'); document.body.append(frame);
-      frame.contentDocument.body.innerHTML = document.body.innerHTML;
-      const s = frame.contentDocument.createElement('script');
-      s.textContent = source.replaceAll('link: ""', 'link: "https://example.com/catalogue"');
-      frame.contentDocument.body.append(s);
-      const cards = [...frame.contentDocument.querySelectorAll('.category-card')].slice(-6);
-      return { externalLinks: cards.length === 6 && cards.every(x => x.target === '_blank' && x.rel === 'noopener noreferrer' && x.href === 'https://example.com/catalogue') };
-    })()`, awaitPromise: true, returnByValue: true });
+    const external = await send('Runtime.evaluate', { expression: `(() => {
+      const names = ["BIQUÍNI","BOJO","CALÇA","CALCINHA","CANGA","CONJUNTO","MAIÔ","OUTROS","SAÍDA DE PRAIA","SHORT","SUNGA","SUTIÃ","TOP","VESTIDO"];
+      const cards = [...document.querySelectorAll('.category-card')];
+      return { externalLinks: cards.length === 14 && new Set(cards.map(x => x.href)).size === 14 && cards.every((x,i) => x.target === '_blank' && x.rel === 'noopener noreferrer' && x.querySelector('h3').textContent === names[i] && x.href === 'https://luardeverao.pedidook.com.br/?categoria=' + encodeURIComponent(names[i])) };
+    })()`, returnByValue: true });
     console.log(JSON.stringify(external.result.value));
     if(errors.length){console.error(errors);process.exitCode=1;}
     for (const page of ['politica-de-privacidade.html', 'termos-de-uso.html']) {

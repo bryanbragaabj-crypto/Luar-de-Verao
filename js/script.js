@@ -7,18 +7,23 @@ const contatos = {
   maps: "https://maps.app.goo.gl/zMQEsFzRRy5HFf9a8"
 };
 
-/* EDITE SEU CATÁLOGO AQUI.
-   Troque nome, imagem, descrição e link. Você pode adicionar outros objetos.
-   As fotos são referências temporárias, não fotografias das peças da loja.
-   Use link: "https://..." para o canal externo de cada categoria.
-   Um link vazio usa o WhatsApp da loja, quando configurado. */
+/* Categorias oficiais e links do catálogo PedidoOK.
+   Reutilize somente fotografias correspondentes disponíveis no projeto. */
 const categorias = [
-  { nome: "Biquínis", imagem: "assets/images/biquinis.webp", descricao: "Sol, mar e liberdade em cada detalhe.", link: "" },
-  { nome: "Maiôs", imagem: "assets/images/maios-editorial.webp", descricao: "Elegância para mergulhar no seu estilo.", link: "" },
-  { nome: "Saídas de Praia", imagem: "assets/images/saidas-editorial.webp", descricao: "Leveza que vai além da beira do mar.", link: "" },
-  { nome: "Vestidos", imagem: "assets/images/vestidos.webp", descricao: "Movimento e charme para dias solares.", link: "" },
-  { nome: "Moda Masculina", imagem: "assets/images/masculina-editorial.webp", descricao: "Conforto para aproveitar cada onda.", link: "" },
-  { nome: "Acessórios", imagem: "assets/images/acessorios-editorial.webp", descricao: "Pequenos detalhes. Muito verão.", link: "" }
+  { nome: "BIQUÍNI", imagem: "assets/images/biquinis.webp", link: "https://luardeverao.pedidook.com.br/?categoria=BIQU%C3%8DNI" },
+  { nome: "BOJO", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=BOJO" },
+  { nome: "CALÇA", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=CAL%C3%87A" },
+  { nome: "CALCINHA", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=CALCINHA" },
+  { nome: "CANGA", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=CANGA" },
+  { nome: "CONJUNTO", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=CONJUNTO" },
+  { nome: "MAIÔ", imagem: "assets/images/maios-editorial.webp", link: "https://luardeverao.pedidook.com.br/?categoria=MAI%C3%94" },
+  { nome: "OUTROS", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=OUTROS" },
+  { nome: "SAÍDA DE PRAIA", imagem: "assets/images/saidas-editorial.webp", link: "https://luardeverao.pedidook.com.br/?categoria=SA%C3%8DDA%20DE%20PRAIA" },
+  { nome: "SHORT", imagem: "assets/images/masculina-editorial.webp", link: "https://luardeverao.pedidook.com.br/?categoria=SHORT" },
+  { nome: "SUNGA", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=SUNGA" },
+  { nome: "SUTIÃ", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=SUTI%C3%83" },
+  { nome: "TOP", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=TOP" },
+  { nome: "VESTIDO", imagem: "assets/images/vestidos.webp", link: "https://luardeverao.pedidook.com.br/?categoria=VESTIDO" }
 ];
 
 // Aceita somente links HTTP/HTTPS para os destinos externos.
@@ -35,30 +40,33 @@ function linkWhatsApp() {
 
 // Cria os elementos com textContent para manter a edição de textos segura.
 const grid = document.querySelector("#category-grid");
-categorias.forEach((categoria, indice) => {
+categorias.forEach(categoria => {
   // Um único link envolve todo o card: foto, nome e ação são clicáveis.
   const card = document.createElement("a");
   card.className = "category-card reveal";
   const foto = document.createElement("div");
   foto.className = "category-photo";
-  const imagem = document.createElement("img");
-  imagem.src = categoria.imagem;
-  imagem.alt = `Imagem ilustrativa da categoria ${categoria.nome}`;
-  imagem.loading = "lazy";
-  imagem.width = 800;
-  imagem.height = 900;
-  // Se a foto temporária falhar, mantém um espaço visual agradável.
-  imagem.addEventListener("error", () => { imagem.hidden = true; });
-  const numero = document.createElement("span");
-  numero.className = "category-number";
-  numero.textContent = String(indice + 1).padStart(2, "0");
-  foto.append(imagem, numero);
+  if (categoria.imagem) {
+    const imagem = document.createElement("img");
+    imagem.src = categoria.imagem;
+    imagem.alt = `Imagem ilustrativa da categoria ${categoria.nome}`;
+    imagem.loading = "lazy";
+    imagem.width = 800;
+    imagem.height = 900;
+    // Se a foto temporária falhar, mantém um espaço visual agradável.
+    imagem.addEventListener("error", () => { imagem.hidden = true; });
+    foto.append(imagem);
+  } else {
+    foto.classList.add("category-photo-placeholder");
+    foto.setAttribute("aria-hidden", "true");
+    const nome = document.createElement("span");
+    nome.textContent = categoria.nome;
+    foto.append(nome);
+  }
   const corpo = document.createElement("div");
   corpo.className = "category-body";
   const titulo = document.createElement("h3");
   titulo.textContent = categoria.nome;
-  const descricao = document.createElement("p");
-  descricao.textContent = categoria.descricao;
   const link = document.createElement("span");
   link.className = "category-link";
   link.textContent = "Ver Categoria";
@@ -76,7 +84,7 @@ categorias.forEach((categoria, indice) => {
     card.href = "#contato";
     card.setAttribute("aria-label", `Consultar disponibilidade de ${categoria.nome} na seção de contato`);
   }
-  corpo.append(titulo, descricao, link);
+  corpo.append(titulo, link);
   card.append(foto, corpo);
   grid.append(card);
 });

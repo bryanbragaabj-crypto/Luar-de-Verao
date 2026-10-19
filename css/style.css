@@ -93,7 +93,8 @@ em { font-weight: 400; }
 .category-card { display: block; min-width: 0; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-card); overflow: hidden; box-shadow: var(--shadow-card); transition: box-shadow var(--transition-ui), transform var(--transition-ui); }
 .category-photo { position: relative; aspect-ratio: 4/4.5; overflow: hidden; background: var(--offwhite); }
 .category-photo img { height: 100%; width: 100%; transition: transform 550ms; }
-.category-number { display: none; }
+.category-photo-placeholder { display: flex; align-items: center; justify-content: center; padding: 20px; background: var(--offwhite); }
+.category-photo-placeholder span { max-width: 100%; text-align: center; overflow-wrap: anywhere; font-size: clamp(18px, 2.5vw, 32px); font-weight: 500; letter-spacing: .06em; }
 .category-body { position: relative; display: flex; align-items: center; min-height: 70px; padding: 20px 54px 20px 22px; }
 .category-body h3 { font-size: 20px; font-weight: 500; line-height: 1.45; letter-spacing: -.025em; margin: 0; }
 .category-body p { display: none; }
