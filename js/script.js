@@ -10,20 +10,20 @@ const contatos = {
 /* Categorias oficiais e links do catálogo PedidoOK.
    Reutilize somente fotografias correspondentes disponíveis no projeto. */
 const categorias = [
-  { nome: "BIQUÍNI", imagem: "assets/images/biquinis.webp", link: "https://luardeverao.pedidook.com.br/?categoria=BIQU%C3%8DNI" },
-  { nome: "BOJO", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=BOJO" },
-  { nome: "CALÇA", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=CAL%C3%87A" },
-  { nome: "CALCINHA", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=CALCINHA" },
-  { nome: "CANGA", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=CANGA" },
-  { nome: "CONJUNTO", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=CONJUNTO" },
-  { nome: "MAIÔ", imagem: "assets/images/maios-editorial.webp", link: "https://luardeverao.pedidook.com.br/?categoria=MAI%C3%94" },
-  { nome: "OUTROS", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=OUTROS" },
-  { nome: "SAÍDA DE PRAIA", imagem: "assets/images/saidas-editorial.webp", link: "https://luardeverao.pedidook.com.br/?categoria=SA%C3%8DDA%20DE%20PRAIA" },
-  { nome: "SHORT", imagem: "assets/images/masculina-editorial.webp", link: "https://luardeverao.pedidook.com.br/?categoria=SHORT" },
-  { nome: "SUNGA", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=SUNGA" },
-  { nome: "SUTIÃ", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=SUTI%C3%83" },
-  { nome: "TOP", imagem: "", link: "https://luardeverao.pedidook.com.br/?categoria=TOP" },
-  { nome: "VESTIDO", imagem: "assets/images/vestidos.webp", link: "https://luardeverao.pedidook.com.br/?categoria=VESTIDO" }
+  { nome: "BIQUÍNI", imagem: "assets/images/categories/biquini.webp", link: "https://luardeverao.pedidook.com.br/?categoria=BIQU%C3%8DNI" },
+  { nome: "BOJO", imagem: "assets/images/categories/bojo.webp", link: "https://luardeverao.pedidook.com.br/?categoria=BOJO" },
+  { nome: "CALÇA", imagem: "assets/images/categories/calca.webp", link: "https://luardeverao.pedidook.com.br/?categoria=CAL%C3%87A" },
+  { nome: "CALCINHA", imagem: "assets/images/categories/calcinha.webp", link: "https://luardeverao.pedidook.com.br/?categoria=CALCINHA" },
+  { nome: "CANGA", imagem: "assets/images/categories/canga.webp", link: "https://luardeverao.pedidook.com.br/?categoria=CANGA" },
+  { nome: "CONJUNTO", imagem: "assets/images/categories/conjunto.webp", link: "https://luardeverao.pedidook.com.br/?categoria=CONJUNTO" },
+  { nome: "MAIÔ", imagem: "assets/images/categories/maio.webp", link: "https://luardeverao.pedidook.com.br/?categoria=MAI%C3%94" },
+  { nome: "OUTROS", imagem: "assets/images/categories/outros.webp", link: "https://luardeverao.pedidook.com.br/?categoria=OUTROS" },
+  { nome: "SAÍDA DE PRAIA", imagem: "assets/images/categories/saida-de-praia.webp", link: "https://luardeverao.pedidook.com.br/?categoria=SA%C3%8DDA%20DE%20PRAIA" },
+  { nome: "SHORT", imagem: "assets/images/categories/short.webp", link: "https://luardeverao.pedidook.com.br/?categoria=SHORT" },
+  { nome: "SUNGA", imagem: "assets/images/categories/sunga.webp", link: "https://luardeverao.pedidook.com.br/?categoria=SUNGA" },
+  { nome: "SUTIÃ", imagem: "assets/images/categories/sutia.webp", link: "https://luardeverao.pedidook.com.br/?categoria=SUTI%C3%83" },
+  { nome: "TOP", imagem: "assets/images/categories/top.webp", link: "https://luardeverao.pedidook.com.br/?categoria=TOP" },
+  { nome: "VESTIDO", imagem: "assets/images/categories/vestido.webp", link: "https://luardeverao.pedidook.com.br/?categoria=VESTIDO" }
 ];
 
 // Aceita somente links HTTP/HTTPS para os destinos externos.
@@ -52,7 +52,7 @@ categorias.forEach(categoria => {
     imagem.alt = `Imagem ilustrativa da categoria ${categoria.nome}`;
     imagem.loading = "lazy";
     imagem.width = 800;
-    imagem.height = 900;
+    imagem.height = 1000;
     // Se a foto temporária falhar, mantém um espaço visual agradável.
     imagem.addEventListener("error", () => { imagem.hidden = true; });
     foto.append(imagem);

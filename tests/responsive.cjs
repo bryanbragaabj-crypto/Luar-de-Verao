@@ -49,6 +49,7 @@ server.listen(8127, '127.0.0.1', async () => {
       await send('Runtime.evaluate', { expression: 'document.fonts.ready', awaitPromise: true });
       // Aguarda as imagens visiveis; o carregamento lazy pode continuar apos as fontes.
       await send('Runtime.evaluate', {expression: "Promise.all([...document.images].filter(img => img.getBoundingClientRect().top < innerHeight).map(img => img.decode().catch(() => {})))",awaitPromise:true});
+      await send('Runtime.evaluate', {expression: "Promise.all([...document.querySelectorAll('.category-photo img')].map(img=>{img.loading='eager';return img.decode();}))",awaitPromise:true});
       const result = await send('Runtime.evaluate', { expression: `(() => {
         document.documentElement.style.scrollBehavior = 'auto'; window.scrollTo(0, 0);
         const h = document.querySelector('.header').getBoundingClientRect();
@@ -58,6 +59,7 @@ server.listen(8127, '127.0.0.1', async () => {
         const r = { width: innerWidth, noOverflow: document.documentElement.scrollWidth <= innerWidth,
           headerClear: document.querySelector('.hero-visual').getBoundingClientRect().top >= h.bottom - 1,
           whatsappConsistent: [...document.querySelectorAll('[data-contact=whatsapp]')].every(a=>a.querySelector('.whatsapp-icon') && a.getAttribute('aria-label') && !a.classList.contains('is-active')),
+          categoryPhotos: cards.length === 14 && cards.every(c=>{const img=c.querySelector('.category-photo img');return img && img.complete && img.naturalWidth===800 && img.naturalHeight===1000 && getComputedStyle(img).objectFit==='cover';}),
           cardsClickable: cards.length === 14 && cards.every(x => x.tagName === 'A' && x.getAttribute('href')),
           imagesLoaded: [...document.images].filter(x => x.getBoundingClientRect().top < innerHeight).every(x => x.complete && x.naturalWidth > 0),
           categoryColumns: getComputedStyle(document.querySelector('.category-grid')).gridTemplateColumns.split(' ').length,
